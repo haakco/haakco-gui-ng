@@ -1,0 +1,75 @@
+<mat-card
+  fxFill
+  fxLayoutGap
+  fxLayout="row"
+  fxLayoutAlign="space-around stretch">
+  <div
+    fxFlex fxLayout="column"
+    fxLayoutAlign="start stretch"
+  >
+    <h2>Assigned Roles</h2>
+    <div
+      fxFlex
+      cdkDropList
+      #userRolesList="cdkDropList"
+      [cdkDropListData]="userRoles"
+      [cdkDropListConnectedTo]="[availableRoleList]"
+      class="draggable-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <mat-card
+        class="draggable-item" *ngFor="let item of userRoles | values" cdkDrag
+      >
+        <span
+          class="draggable-icon"
+        >
+          <fa-icon
+            matPrefix
+            icon="grip-vertical"
+          ></fa-icon>
+        </span>
+        <span
+          class="draggable-text"
+        >{{item}}</span>
+
+      </mat-card>
+    </div>
+  </div>
+  <div
+    fxFlex="10"
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+  >
+    <button>test</button>
+  </div>
+  <div
+    fxFlex
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+  >
+    <h2>Available Roles</h2>
+    <div
+      fxFlex
+      cdkDropList
+      #availableRoleList="cdkDropList"
+      [cdkDropListData]="availableRoles"
+      [cdkDropListConnectedTo]="[userRolesList]"
+      class="draggable-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <mat-card class="draggable-item" *ngFor="let item of availableRoles" cdkDrag>
+          <span
+            class="draggable-icon"
+          >
+          <fa-icon
+            matPrefix
+            icon="grip-vertical"
+          ></fa-icon>
+        </span>
+        <span
+          class="draggable-text"
+        >{{item}}</span>
+      </mat-card>
+    </div>
+  </div>
+</mat-card>

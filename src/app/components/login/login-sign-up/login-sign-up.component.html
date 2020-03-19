@@ -1,0 +1,112 @@
+<div class="register-box">
+  <div class="register-logo">
+    <fa-icon
+      icon="user-plus"
+      size="2x"
+    ></fa-icon>
+  </div>
+  <form
+    #signUpForm="ngForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-card>
+      <mat-card-content>
+        <p class="login-box-msg">Register a new membership</p>
+        <mat-form-field
+          class="full-width-field"
+          appearance="standard"
+        >
+          <mat-label>Full Name</mat-label>
+          <input
+            matInput
+            placeholder="Full Name"
+            type="text"
+            name="name"
+            autocomplete="name"
+            [(ngModel)]="form.name"
+            required
+            minlength="3"
+            #name="ngModel"
+          >
+          <fa-icon
+            icon="user"
+            matSuffix
+          ></fa-icon>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-field"
+          appearance="standard"
+        >
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="user@example.com"
+            type="email"
+            name="form.email"
+            autocomplete="email"
+            [(ngModel)]="form.email"
+            required
+            pattern="[^ @]*@[^ @]*"
+          >
+          <fa-icon
+            icon="envelope"
+            matSuffix
+          ></fa-icon>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-field"
+          appearance="standard"
+        >
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="Password"
+            [(ngModel)]="form.password"
+            type="password"
+            name="password"
+            required
+            autocomplete="new-password"
+            minlength="8"
+            #password="ngModel"
+          >
+          <fa-icon
+            icon="lock"
+            matSuffix
+          ></fa-icon>
+          <mat-hint align="end">
+            {{ ConstantValidation.passwordRequirementString }}
+          </mat-hint>
+        </mat-form-field>
+        <p>
+          <a
+            [routerLink]="['/forgot-password']"
+          >
+            I forgot my password
+          </a>
+        </p>
+        <p>
+          <a
+            [routerLink]="['/login']"
+            class="text-center"
+          >I already have a membership</a>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          type="submit"
+          mat-raised-button
+          [disabled]="!signUpForm.form.valid"
+        >Register
+        </button>
+        <p>
+          By clicking
+          <em>Register</em> you agree to our
+          <a
+            [routerLink]="['/terms-of-service']"
+            target="_blank"
+          >terms of service</a>.
+        </p>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

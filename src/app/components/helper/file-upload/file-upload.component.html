@@ -1,0 +1,24 @@
+<div class="image-upload">
+  <input
+    id="file-input"
+    class="file-input"
+    #fileUploadInput
+    type="file"
+    [multiple]="allowMultipleFiles"
+    [accept]="_accept"
+    (change)="handleFileInput($event.target.files)"
+  />
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="btn-large btn-submit"
+    (click)="addFiles()"
+  >
+    <fa-icon
+      [icon]="uploadIcon"
+    ></fa-icon> {{primaryButtonText}}
+  </button>
+</div>
+
+

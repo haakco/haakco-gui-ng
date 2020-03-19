@@ -1,0 +1,12 @@
+{
+  "/api/v1": {
+    "target": "https://dev.haak.co",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "headers": {
+      "Connection": "keep-alive"
+    },
+    "pathRewrite": {"^/api/v1" : "https://dev.haak.co/api/v1"}
+  }
+}

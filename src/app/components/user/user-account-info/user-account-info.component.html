@@ -1,0 +1,24 @@
+<mat-card
+  *ngIf="user"
+  class="avatar-card"
+>
+  <mat-card-header>
+    <img
+      class="circle avatar mat-elevation-z8"
+      src="{{ user?.imgUrl }}"
+      alt="User profile picture"
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <app-file-upload
+      [accept]="acceptTypes"
+      [primaryButtonText]="'Change Photo'"
+      [postUrl]="'/user/' + user?.uuid + '/image'"
+      [autoClose]="true"
+      (uploadComplete)="userImageUploadComplete($event)"
+    ></app-file-upload>
+    <h1 class="profile-username text-center">{{ user?.name }}</h1>
+    <p class="text-muted text-center">{{ user?.email }}</p>
+  </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,43 @@
+<div
+  *ngIf="user && user.name"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutGap="4px"
+  fxFlexFill
+  fxLayoutAlign="start stretch"
+>
+  <div
+    fxFlex="30%"
+  >
+    <app-user-account-info
+      [user]="user"
+    ></app-user-account-info>
+    <app-user-account-rights
+      [user]="user"
+    ></app-user-account-rights>
+  </div>
+  <div
+    fxFlex="70%"
+  >
+    <mat-tab-group
+      mat-align-tabs="start"
+      class="full-width-field"
+      id="group"
+      [selectedIndex]="activeTab"
+      (selectedIndexChange)="setSelectedValue($event)"
+    >
+      <mat-tab label="Details">
+        <app-account-user-settings
+          [user]="user"
+        ></app-account-user-settings>
+      </mat-tab>
+      <mat-tab
+        label="Roles"
+      >
+        <app-user-roles
+          [user]="user"
+        ></app-user-roles>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+main.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 4px;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+  height: 100vh;
+}
+
+app-base-head {
+  grid-area: header;
+  text-align: center;
+}
+
+app-base-body {
+  grid-area: content;
+  padding: 5px;
+}
+
+//app-aside {
+//  grid-area: side;
+//  margin-right: 0.6rem;
+//  background-color: #2A92BF;
+//}
+
+app-base-footer {
+  grid-area: footer;
+  text-align: center;
+}
+
+.app-base {
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.complete-center {
+  display: grid; // or flex!
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.full-width-field {
+  width: 100%;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.avatar {
+  width: 124px;
+  height: 124px;
+  border: 1px solid #fff;
+  margin: -50px auto 10px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.m5 {
+  margin: 5px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+//.ng-valid[required], .ng-valid.required {
+//  border-left: 5px solid #42A948; /* green */
+//}
+//
+//.ng-invalid:not(form) {
+//  border-left: 5px solid #a94442; /* red */
+//}

@@ -1,0 +1,238 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "haakco-gui-ng": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/haakco-gui-ng",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/favicon.png",
+              "src/assets",
+              "src/manifest.webmanifest",
+              "src/android-chrome-36x36.png",
+              "src/android-chrome-48x48.png",
+              "src/android-chrome-72x72.png",
+              "src/android-chrome-96x96.png",
+              "src/android-chrome-144x144.png",
+              "src/android-chrome-192x192.png",
+              "src/android-chrome-256x256.png",
+              "src/android-chrome-384x384.png",
+              "src/android-chrome-512x512.png",
+              "src/apple-touch-icon.png",
+              "src/apple-touch-icon-120x120.png",
+              "src/apple-touch-icon-152x152.png",
+              "src/apple-touch-icon-167x167.png",
+              "src/apple-touch-icon-180x180.png",
+              "src/apple-touch-startup-image-640x1136.png",
+              "src/apple-touch-startup-image-750x1334.png",
+              "src/apple-touch-startup-image-828x1792.png",
+              "src/apple-touch-startup-image-1125x2436.png",
+              "src/apple-touch-startup-image-1242x2208.png",
+              "src/apple-touch-startup-image-1242x2688.png",
+              "src/apple-touch-startup-image-1536x2048.png",
+              "src/apple-touch-startup-image-1668x2224.png",
+              "src/apple-touch-startup-image-1668x2388.png",
+              "src/apple-touch-startup-image-1792x828.png",
+              "src/apple-touch-startup-image-2048x1536.png",
+              "src/apple-touch-startup-image-2048x2732.png",
+              "src/apple-touch-startup-image-2208x1242.png",
+              "src/apple-touch-startup-image-2224x1668.png",
+              "src/apple-touch-startup-image-2388x1668.png",
+              "src/apple-touch-startup-image-2436x1125.png",
+              "src/apple-touch-startup-image-2688x1242.png",
+              "src/apple-touch-startup-image-2732x2048.png",
+              "src/favicon-16x16.png",
+              "src/favicon-32x32.png",
+              "src/logo192.png",
+              "src/logo512.png",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "/assets/img/markers"
+              }
+            ],
+            "styles": [
+              "src/scss/external/vendor.scss",
+              "src/scss/styles.scss"
+            ],
+            "scripts": [
+            ]
+          },
+          "configurations": {
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            },
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "haakco-gui-ng:build",
+            "proxyConfig": "proxy.conf.json",
+            "hmrWarning": false
+          },
+          "configurations": {
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "haakco-gui-ng:build:hmr"
+            },
+            "production": {
+              "browserTarget": "haakco-gui-ng:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "haakco-gui-ng:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/favicon.png",
+              "src/assets",
+              "src/manifest.webmanifest",
+              "src/android-chrome-36x36.png",
+              "src/android-chrome-48x48.png",
+              "src/android-chrome-72x72.png",
+              "src/android-chrome-96x96.png",
+              "src/android-chrome-144x144.png",
+              "src/android-chrome-192x192.png",
+              "src/android-chrome-256x256.png",
+              "src/android-chrome-384x384.png",
+              "src/android-chrome-512x512.png",
+              "src/apple-touch-icon.png",
+              "src/apple-touch-icon-120x120.png",
+              "src/apple-touch-icon-152x152.png",
+              "src/apple-touch-icon-167x167.png",
+              "src/apple-touch-icon-180x180.png",
+              "src/apple-touch-startup-image-640x1136.png",
+              "src/apple-touch-startup-image-750x1334.png",
+              "src/apple-touch-startup-image-828x1792.png",
+              "src/apple-touch-startup-image-1125x2436.png",
+              "src/apple-touch-startup-image-1242x2208.png",
+              "src/apple-touch-startup-image-1242x2688.png",
+              "src/apple-touch-startup-image-1536x2048.png",
+              "src/apple-touch-startup-image-1668x2224.png",
+              "src/apple-touch-startup-image-1668x2388.png",
+              "src/apple-touch-startup-image-1792x828.png",
+              "src/apple-touch-startup-image-2048x1536.png",
+              "src/apple-touch-startup-image-2048x2732.png",
+              "src/apple-touch-startup-image-2208x1242.png",
+              "src/apple-touch-startup-image-2224x1668.png",
+              "src/apple-touch-startup-image-2388x1668.png",
+              "src/apple-touch-startup-image-2436x1125.png",
+              "src/apple-touch-startup-image-2688x1242.png",
+              "src/apple-touch-startup-image-2732x2048.png",
+              "src/favicon-16x16.png",
+              "src/favicon-32x32.png",
+              "src/logo192.png",
+              "src/logo512.png",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "/assets/img/markers"
+              }
+            ],
+            "styles": [
+              "src/scss/external/vendor.scss",
+              "src/scss/styles.scss"
+            ],
+            "scripts": [
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "haakco-gui-ng:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "haakco-gui-ng:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "haakco-gui-ng",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
+}

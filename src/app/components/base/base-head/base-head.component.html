@@ -1,0 +1,112 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <!--    <button mat-icon-button>-->
+    <!--      <fa-icon-->
+    <!--        icon="bars"-->
+    <!--        transform="rotate-{{layoutState.barRotation}}"-->
+    <!--      ></fa-icon>-->
+    <!--    </button>-->
+    <img
+      *ngIf="constantAppConfig.navBarLogoImgUrl.length > 0"
+      src="{{ constantAppConfig.navBarLogoImgUrl }}"
+      alt="Logo"
+      class="toolbar-logo"
+    >
+    {{ constantAppConfig.navBarLogoTxt }}
+    <span class="menu-spacer"></span>
+    <div
+      fxLayout="row"
+      fxLayoutGap="1px"
+      fxLayoutAlign="start center"
+    >
+      <a
+        mat-button
+        [routerLink]="'home'"
+      >
+        <fa-icon
+          icon="home"
+        ></fa-icon>
+      </a>
+      <div
+        *ngFor="let menu of mainMenu"
+      >
+        <div
+          *ngxPermissionsOnly="menu.allowed"
+        >
+          <button
+            mat-button
+            [matMenuTriggerFor]="menuTop"
+          >
+            {{menu.title}}
+          </button>
+          <mat-menu #menuTop="matMenu">
+            <div
+              *ngFor="let childMenu of menu.children"
+            >
+              <button
+                mat-menu-item
+                *ngxPermissionsOnly="childMenu.allowed"
+                [routerLink]="[childMenu.route]"
+              >
+                {{childMenu.title}}
+              </button>
+            </div>
+
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+    <div class="fill-remaining-space">
+    </div>
+    <div>
+      <div
+        *ngIf="!authState?.loggedIn"
+      >
+        <a
+          mat-button
+          [routerLink]="['/login']"
+        >
+          <fa-icon
+            icon="sign-in-alt"
+          ></fa-icon>
+          Sign In
+        </a>
+      </div>
+      <div
+        *ngIf="authState?.loggedIn"
+      >
+        <a
+          mat-button
+          [matMenuTriggerFor]="userMenu"
+        >
+          <img
+            *ngIf="authState?.user?.imgUrl"
+            alt="user avatar"
+            class="menu-avatar-img"
+            src="{{ authState.user.imgUrl }}"
+          >
+        </a>
+        <mat-menu #userMenu="matMenu">
+          <button
+            mat-menu-item
+            [routerLink]="['/user/account']"
+          >
+            <fa-icon
+              icon="user-circle"
+            ></fa-icon>
+            Account
+          </button>
+          <button
+            mat-menu-item
+            (click)="logOut()"
+          >
+            <fa-icon
+              icon="sign-out-alt"
+            ></fa-icon>
+            Sign Out
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

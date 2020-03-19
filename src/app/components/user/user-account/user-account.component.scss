@@ -1,0 +1,15 @@
+:host {
+  width: 100%;
+}
+
+#group {
+  height: 100%; // Whole group height.
+
+  ::ng-deep .mat-tab-body-wrapper {
+    height: 100%; // Tabs body height. I also don't like ng-deep, but there is no other way :(
+  }
+
+  .tab-content-container {
+    height: 100%;  // Content height.
+  }
+}

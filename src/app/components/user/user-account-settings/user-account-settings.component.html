@@ -1,0 +1,93 @@
+<mat-card
+  class="m5"
+  *ngIf="_editUser"
+>
+  <mat-card-content>
+    <form
+      #userDetailsForm="ngForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field
+        class="full-width-field"
+        appearance="standard"
+      >
+        <mat-label>Full Name</mat-label>
+        <input
+          matInput
+          placeholder="Full Name"
+          type="text"
+          name="name"
+          autocomplete="name"
+          [(ngModel)]="_editUser.name"
+          required
+          minlength="3"
+          [disabled]="!canEdit"
+        >
+        <fa-icon
+          icon="user"
+          matSuffix
+        ></fa-icon>
+      </mat-form-field>
+      <mat-form-field
+        class="full-width-field"
+        appearance="standard"
+      >
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="user@example.com"
+          type="email"
+          name="form.email"
+          autocomplete="email"
+          [(ngModel)]="_editUser.email"
+          required
+          pattern="[^ @]*@[^ @]*"
+          [disabled]="!canEdit"
+        >
+        <fa-icon
+          icon="envelope"
+          matSuffix
+        ></fa-icon>
+      </mat-form-field>
+      <button
+        type="button"
+        *ngIf="!canEdit"
+        mat-raised-button
+        color="warn"
+        (click)="edit()"
+      >
+        <fa-icon
+          icon="edit"
+        ></fa-icon>
+      </button>
+      <button
+        *ngIf="canEdit"
+        type="button"
+        mat-raised-button
+        color="warn"
+        (click)="editCancel()"
+      >
+        <fa-icon
+          icon="times-circle"
+        ></fa-icon>
+      </button>
+      &nbsp;
+      <button
+        *ngIf="canEdit"
+        type="submit"
+        mat-raised-button
+        color="primary"
+      >
+        Update
+        <fa-icon
+          icon="save"
+        ></fa-icon>
+      </button>
+    </form>
+
+    <app-user-change-password
+      *ngIf="(authUser| async) && (authUser | async).uuid === _user.uuid"
+      [user]="_user"
+    ></app-user-change-password>
+  </mat-card-content>
+</mat-card>

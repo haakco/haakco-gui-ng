@@ -1,0 +1,45 @@
+<mat-card class="admin-user-list-card">
+  <mat-form-field
+    class="full-width-field"
+    appearance="standard"
+  >
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      placeholder="User Name"
+      type="text"
+      name="userFilter"
+      [(ngModel)]="userFilter"
+      (ngModelChange)='filterInputChange($event)'
+    >
+    <fa-icon
+      icon="filter"
+      matSuffix
+    ></fa-icon>
+  </mat-form-field>
+  <mat-nav-list class="user-list">
+    <button
+      mat-list-item
+      *ngFor="let uuid of filteredUserUuids"
+      [routerLink]="['/admin/users', uuid]"
+      [queryParams]="{userFilter: userFilter}"
+    >
+      <img
+        matListAvatar
+        src="{{ _users[uuid]?.imgUrl }}"
+        alt="{{ _users[uuid].name }} Image"
+      >
+      <h3 matLine> {{_users[uuid].name}} </h3>
+      <p matLine>
+        <span> {{_users[uuid].email}} </span>
+      </p>
+      <p matLine>
+        <span>Added: {{_users[uuid].created_at | amDateFormat:'LL'}} </span>
+      </p>
+      <p matLine>
+        <span>Last updated: {{_users[uuid].updated_at | amTimeAgo:true}} </span>
+      </p>
+    </button>
+  </mat-nav-list>
+
+</mat-card>

@@ -1,0 +1,9 @@
+{
+  "upgrade": true,
+  "interactive": true,
+  "reject": [
+    "tinymce",
+    "ts-node",
+    "typescript"
+  ]
+}

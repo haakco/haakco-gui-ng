@@ -1,0 +1,18 @@
+<mat-card
+  class="admin-user-manage"
+  fxLayout="row"
+  fxLayoutGap="4px"
+  fxFlexFill
+  fxLayoutAlign="start stretch"
+>
+  <app-admin-users-list
+    [users]="(users$ | async)"></app-admin-users-list>
+  <mat-card
+    class="admin-user-detail-card"
+  >
+    <app-user-account
+      *ngIf="(users$ | async) && userUuid"
+      [user]="(users$ | async)[userUuid]"
+    ></app-user-account>
+  </mat-card>
+</mat-card>
