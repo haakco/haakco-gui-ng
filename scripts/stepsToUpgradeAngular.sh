@@ -10,8 +10,6 @@ ng update @angular/cli
 git commit -a -m 'Update'
 ng update @angular/core
 git commit -a -m 'Update'
-npm run addNgUikitPro
-git commit -a -m 'Update'
 ncu
 
 # Update what you think should be updated
