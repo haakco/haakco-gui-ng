@@ -62,34 +62,38 @@ export class PusherService implements OnDestroy {
   }
 
   initialise() {
-    if (this.token && this.userUuid && ConstantPusherConfig.enabled) {
+    if (ConstantPusherConfig.enabled) {
+      this.logger.debug('Trying to initialise pusher ');
+      if (this.token && this.userUuid) {
+        this.logger.debug('Required data is available to initialise pusher');
 
-      if (this.pusher && this.pusher.disconnect) {
-        this.pusher.disconnect();
-      }
+        if (this.pusher && this.pusher.disconnect) {
+          this.pusher.disconnect();
+        }
 
-      this.pusher = new Pusher.default(ConstantPusherConfig.devKey, {
-        cluster: ConstantPusherConfig.cluster,
-        encrypted: true,
-        authEndpoint: this.baseUrl,
-        auth: {
-          headers: {
-            Authorization: `Bearer ${this.token.access_token}`,
+        this.pusher = new Pusher.default(ConstantPusherConfig.key, {
+          cluster: ConstantPusherConfig.cluster,
+          encrypted: true,
+          authEndpoint: this.baseUrl,
+          auth: {
+            headers: {
+              Authorization: `Bearer ${this.token.access_token}`,
+            },
+            params: {},
           },
-          params: {}
-        },
-      });
+        });
 
-      // this.logger.debug('private-user.' + this.userUuid);
+        this.logger.debug('private-user.' + this.userUuid);
 
-      this.channel = this.pusher.subscribe('private-user.' + this.userUuid);
+        this.channel = this.pusher.subscribe('private-user.' + this.userUuid);
 
-      this.channel.bind(
-        'UserNotifyEvent',
-        (data) => {
-          this.logger.debug(data);
-        },
-      );
+        this.channel.bind(
+          'UserNotifyEvent',
+          (data) => {
+            this.logger.debug(data);
+          },
+        );
+      }
     }
   }
 
