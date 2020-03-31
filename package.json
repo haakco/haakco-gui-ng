@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "ngcc",
     "build": "ng build",
     "bundle-report": "ng build --stats-json; webpack-bundle-analyzer dist/haakco-gui-ng/stats-es2015.json",
     "e2e": "ng e2e",
@@ -16,7 +17,7 @@
     "npmCheck": "ncu",
     "prod": "node ./node_modules/.bin/ng build --prod --base-href='/'",
     "sort-packages": "npx sort-package-json",
-    "start": "rm -rf dist;node ./node_modules/.bin/ng serve --configuration hmr --host 0.0.0.0 --disableHostCheck",
+    "start": "rm -rf dist;node ./node_modules/.bin/ng serve --configuration hmr --aot=true --host 0.0.0.0 --disableHostCheck",
     "test": "ng test",
     "favicons": "npx favicons"
   },
@@ -37,6 +38,7 @@
     "@angular/router": "^9.1.0",
     "@angular/service-worker": "^9.1.0",
     "@fortawesome/angular-fontawesome": "^0.6.0",
+    "@fortawesome/fontawesome-common-types": "^0.2.28",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
@@ -102,7 +104,7 @@
     "@types/mime-types": "^2.1.0",
     "@types/node": "^13.9.3",
     "@types/pusher-js": "^4.2.2",
-    "codelyzer": "^5.2.1",
+    "codelyzer": "^5.2.2",
     "eslint": "^6.8.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.1",

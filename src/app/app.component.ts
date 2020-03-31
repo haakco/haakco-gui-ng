@@ -8,19 +8,17 @@ import {InterfaceUsersObject} from './interfaces/InterfaceUsersObject';
 import {InterfaceStateApp} from './reducers';
 import {InterfaceStateAuth} from './reducers/auth.reducer';
 import {InterfaceStateLayout} from './reducers/layout.reducer';
-import {InterfaceStateUser} from './reducers/user.reducer';
 import {selectAuthState} from './selectors/auth.selectors';
 import {selectLayoutState} from './selectors/layout.selectors';
-import {selectUserUsers} from './selectors/user.selectors';
 import {AuthService} from './services/api/auth.service';
-import {PusherService} from './services/websocket/pusher.service';
 import {TitleServiceService} from './services/helper/title-service.service';
+import {PusherService} from './services/websocket/pusher.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-})
+             selector: 'app-root',
+             templateUrl: './app.component.html',
+             styleUrls: ['./app.component.scss'],
+           })
 export class AppComponent implements OnInit, OnDestroy {
 
   private stop$: Subject<boolean> = new Subject();
@@ -35,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private permissionsService: NgxPermissionsService,
     private titleServiceService: TitleServiceService,
     private pusherService: PusherService,
-    angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
+    angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
   ) {
     angulartics2GoogleAnalytics.startTracking();
     this.layoutState$ = this.store
