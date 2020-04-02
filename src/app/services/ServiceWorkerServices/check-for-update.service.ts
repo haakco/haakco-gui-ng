@@ -8,7 +8,7 @@ export class CheckForUpdateService {
 
   constructor(private logger: NGXLogger,
               private updates: SwUpdate) {
-    this.logger.debug('Checking for update');
+    this.logger.debug(`${this.constructor.name}: Checking for update`);
     interval(6 * 60 * 1000).subscribe(() => this.updates.checkForUpdate());
   }
 }

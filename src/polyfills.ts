@@ -73,3 +73,5 @@ import 'zone.js/dist/zone'; // Included with Angular CLI.
 import * as process from 'process';
 
 (window as any).process = process;
+// @ts-ignore
+window._rollupMoment__default = null;

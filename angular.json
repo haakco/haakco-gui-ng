@@ -75,6 +75,7 @@
               "src/scss/styles.scss"
             ],
             "scripts": [
+              "node_modules/socket.io-client/dist/socket.io.js"
             ]
           },
           "configurations": {
@@ -200,6 +201,7 @@
               "src/scss/styles.scss"
             ],
             "scripts": [
+              "node_modules/socket.io-client/dist/socket.io.js"
             ]
           }
         },

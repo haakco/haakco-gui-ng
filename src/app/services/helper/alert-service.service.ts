@@ -24,17 +24,17 @@ export class AlertService {
     this.toastService.toastrConfig.autoDismiss = true;
   }
 
-  addAlert(message, type: EnumAlertTypes = EnumAlertTypes.ALERT_TYPE_DANGER, head = null) {
-    if (type === null) {
-      type = EnumAlertTypes.ALERT_TYPE_DANGER;
+  addAlert(message, alertType: EnumAlertTypes = EnumAlertTypes.ALERT_TYPE_DANGER, head = null) {
+    if (alertType === null) {
+      alertType = EnumAlertTypes.ALERT_TYPE_DANGER;
     }
-    if (type === EnumAlertTypes.ALERT_TYPE_SUCCESS) {
+    if (alertType === EnumAlertTypes.ALERT_TYPE_SUCCESS) {
       this.toastService.success(message, null, this.options);
-    } else if (type === EnumAlertTypes.ALERT_TYPE_DANGER) {
+    } else if (alertType === EnumAlertTypes.ALERT_TYPE_DANGER) {
       this.toastService.error(message, null, this.options);
-    } else if (type === EnumAlertTypes.ALERT_TYPE_INFO) {
+    } else if (alertType === EnumAlertTypes.ALERT_TYPE_INFO) {
       this.toastService.info(message, null, this.options);
-    } else if (type === EnumAlertTypes.ALERT_TYPE_WARNING) {
+    } else if (alertType === EnumAlertTypes.ALERT_TYPE_WARNING) {
       this.toastService.warning(message, null, this.options);
     } else {
       this.toastService.info(message, null, this.options);

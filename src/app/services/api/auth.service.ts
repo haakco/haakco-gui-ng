@@ -20,8 +20,8 @@ import {HttpService} from '../helper/http.service';
 import {WindowRef} from '../helper/window-ref.service';
 
 @Injectable({
-  providedIn: 'root',
-})
+              providedIn: 'root',
+            })
 export class AuthService {
 
   user: InterfaceUser;
@@ -30,13 +30,15 @@ export class AuthService {
 
   private TOKEN_CACHE_KEY = 'AUTH_SERVICE_TOKEN';
 
-  constructor(private logger: NGXLogger,
-              private dataCachingService: DataCachingService,
-              private httpService: HttpService,
-              private store: Store<InterfaceStateApp>,
-              private permissionsService: NgxPermissionsService,
-              private winRef: WindowRef,
-              private alertService: AlertService) {
+  constructor(
+    private logger: NGXLogger,
+    private dataCachingService: DataCachingService,
+    private httpService: HttpService,
+    private store: Store<InterfaceStateApp>,
+    private permissionsService: NgxPermissionsService,
+    private winRef: WindowRef,
+    private alertService: AlertService,
+  ) {
     this.store
       .select(selectAuthLoggedIn)
       .subscribe((loggedIn) => {
@@ -78,19 +80,19 @@ export class AuthService {
     this.token = token;
     this.loggedIn = true;
     this.store.dispatch(AuthLoginSetToken({
-      token,
-    }));
+                                            token,
+                                          }));
   }
 
   logOut() {
     this.httpService.getRequest('/logout')
       .subscribe(result => {
-        this.logger.debug('Logged out');
+        this.logger.debug(`${this.constructor.name}: Logged out`);
       });
     this.store.dispatch(
       RouterGo({
-        path: ['/login'],
-      }),
+                 path: ['/login'],
+               }),
     );
     this.permissionsService.flushPermissions();
     this.dataCachingService.clear();
@@ -130,8 +132,8 @@ export class AuthService {
       .subscribe((result: any) => {
         this.store.dispatch(
           RouterGo({
-            path: ['/login'],
-          }),
+                     path: ['/login'],
+                   }),
         );
         this.alertService.addAlert('Password Reset Email Sent', EnumAlertTypes.ALERT_TYPE_SUCCESS);
       });
@@ -142,8 +144,8 @@ export class AuthService {
       .subscribe((result: any) => {
         this.store.dispatch(
           RouterGo({
-            path: ['/login'],
-          }),
+                     path: ['/login'],
+                   }),
         );
         this.alertService.addAlert('Password Reset', EnumAlertTypes.ALERT_TYPE_SUCCESS);
       });

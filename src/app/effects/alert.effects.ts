@@ -18,7 +18,7 @@ export class AlertEffects {
           tap(action => {
             this.alertService.addAlert(
               action.payload.message,
-              action.payload.type,
+              action.payload.alertType,
               action.payload.head,
             );
           }),

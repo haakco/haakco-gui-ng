@@ -3,6 +3,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {saveAs} from 'file-saver';
 import isEmpty from 'lodash-es/isEmpty';
+import {NGXLogger} from 'ngx-logger';
 import {Observable, of, Subject, throwError as observableThrowError} from 'rxjs';
 import {catchError, takeUntil} from 'rxjs/operators';
 import {AuthLogout} from '../../actions/auth.actions';
@@ -26,6 +27,7 @@ export class HttpService implements OnDestroy {
   private stop$: Subject<boolean> = new Subject();
 
   constructor(
+    private logger: NGXLogger,
     private dataCachingService: DataCachingService,
     private http: HttpClient,
     private store: Store<InterfaceStateApp>,
@@ -275,7 +277,7 @@ export class HttpService implements OnDestroy {
             progress.complete();
           }
         }, (error: any) => {
-          console.log(error);
+          this.logger.error(`${this.constructor.name}: ${error}`);
           progress.error(error);
         });
 

@@ -75,7 +75,7 @@ export class UserService {
         this.store.dispatch(AlertAdd(
           {
             payload: {
-              type: EnumAlertTypes.ALERT_TYPE_SUCCESS,
+              alertType: EnumAlertTypes.ALERT_TYPE_SUCCESS,
               message: 'User Updated',
             },
           }));
@@ -92,7 +92,7 @@ export class UserService {
         this.store.dispatch(AlertAdd(
           {
             payload: {
-              type: EnumAlertTypes.ALERT_TYPE_SUCCESS,
+              alertType: EnumAlertTypes.ALERT_TYPE_SUCCESS,
               message: 'Password Updated',
             },
           }));
