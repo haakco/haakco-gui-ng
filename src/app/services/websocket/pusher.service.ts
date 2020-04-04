@@ -86,7 +86,7 @@ export class PusherService implements OnDestroy {
     this.logger.debug(`${this.constructor.name}: Trying to initialise echo`);
     this.echo = new Echo(
       {
-        host: 'http://dev.haak.co:6001',
+        host: 'https://dev.haak.co:6001',
         broadcaster: 'socket.io',
         // key: ConstantPusherConfig.key,
         auth: {
