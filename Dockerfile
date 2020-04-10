@@ -19,16 +19,18 @@ ADD . /home/node/src
 
 WORKDIR /home/node/src
 
-#    rm -rf node_modules && \
+RUN npm install -g \
+      @angular/cli@latest \
+      flow-bin@latest \
+      node-gyp@latest nodemon@latest\
+      npm-check-updates@latest \
+      typescript@latest
 
 RUN cd /home/node/src && \
     PATH=./node_modules/.bin/:$PATH && \
     npm --unsafe-perm ci --prefer-offline
 
 RUN npm run build
-#RUN npm run prod-fast
-
-#RUN ./scripts/fixCompression.sh
 
 FROM haakco/nginx-alpine
 
