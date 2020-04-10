@@ -15,7 +15,7 @@
     "ngCreateReducer": "ng generate reducer --group true --creators true --spec=false --project haakco-gui-ng --reducers reducers/index.ts",
     "ngCreateService": "ng generate service --lint-fix --skip-tests --project haakco-gui-ng",
     "npmCheck": "ncu",
-    "prod": "node ./node_modules/.bin/ng build --prod --base-href='/'",
+    "prod": "node ./node_modules/.bin/ng build --prod --aot=true --base-href='/'",
     "sort-packages": "npx sort-package-json",
     "start": "rm -rf dist;node ./node_modules/.bin/ng serve --configuration hmr --aot=true --host 0.0.0.0 --disableHostCheck",
     "start-docker-proxy": "rm -rf dist;node ./node_modules/.bin/ng serve --proxy-config proxy.docker.conf.json --configuration hmr --aot=true --host 0.0.0.0 --disableHostCheck",
