@@ -20,11 +20,7 @@ ADD . /home/node/src
 WORKDIR /home/node/src
 
 RUN npm install -g \
-      @angular/cli@latest \
-      flow-bin@latest \
-      node-gyp@latest nodemon@latest\
-      npm-check-updates@latest \
-      typescript@latest
+      @angular/cli@latest
 
 RUN cd /home/node/src && \
     PATH=./node_modules/.bin/:$PATH && \
