@@ -22,7 +22,7 @@ RUN cd /home/node/src && \
     PATH=./node_modules/.bin/:$PATH && \
     npm --unsafe-perm ci --prefer-offline
 
-RUN npm run prod
+RUN npm run build
 #RUN npm run prod-fast
 
 #RUN ./scripts/fixCompression.sh
