@@ -12,6 +12,7 @@ RUN mkdir -p /home/node/.npm-global && \
 ENV PATH=/home/node/.npm-global/bin:$PATH
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 
+## Cleanout previous dev just in case
 RUN rm -rf /home/node/src/*
 
 ADD . /home/node/src
