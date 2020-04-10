@@ -18,7 +18,7 @@
     "prod": "node ./node_modules/.bin/ng build --prod --base-href='/'",
     "sort-packages": "npx sort-package-json",
     "start": "rm -rf dist;node ./node_modules/.bin/ng serve --configuration hmr --aot=true --host 0.0.0.0 --disableHostCheck",
-    "start-docker": "docker run -it --rm -v \"$(pwd):/home/node/src\" haakco/haakco-gui-ng-dev /home/node/src/scripts/dockerStart.sh",
+    "start-docker": "docker run -it --name haakco-gui-ng-dev -p 4200:4200 --rm -v \"$(pwd):/home/node/src\" haakco/haakco-gui-ng-dev /home/node/src/scripts/dockerStart.sh",
     "test": "ng test",
     "favicons": "npx favicons"
   },

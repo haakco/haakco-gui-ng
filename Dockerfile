@@ -1,4 +1,4 @@
-FROM node:latest as node_builder
+FROM haakco/haakco-gui-ng-dev:latest as node_builder
 
 ENV LANG="en_US.UTF-8" \
     LC_ALL="C.UTF-8" \
@@ -11,6 +11,8 @@ RUN mkdir -p /home/node/.npm-global && \
 
 ENV PATH=/home/node/.npm-global/bin:$PATH
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+
+RUN rm -rf /home/node/src/*
 
 ADD . /home/node/src
 

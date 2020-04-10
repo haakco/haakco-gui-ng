@@ -23,3 +23,5 @@ RUN cd /home/node/src && \
     npm install
 
 RUN npm run build
+
+ENTRYPOINT ["/home/node/src/scripts/dockerStart.sh"]
