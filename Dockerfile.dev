@@ -20,6 +20,6 @@ WORKDIR /home/node/src
 
 RUN cd /home/node/src && \
     PATH=./node_modules/.bin/:$PATH && \
-    npm --unsafe-perm ci --prefer-offline
+    npm install
 
-RUN npm run prod
+RUN npm run build
