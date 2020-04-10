@@ -5,6 +5,7 @@ import {NGXLogger} from 'ngx-logger';
 import * as Pusher from 'pusher-js';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {AlertAdd} from '../../actions/alert.actions';
 import {ConstantAppConfig} from '../../constants/ConstantAppConfig';
 import {ConstantPusherConfig} from '../../constants/ConstantPusherConfig';
 import {InterfaceAlert} from '../../interfaces/InterfaceAlert';
@@ -30,6 +31,7 @@ export class PusherService implements OnDestroy {
 
   pusher;
   echo;
+  userChannel;
 
   constructor(
     private logger: NGXLogger,
@@ -97,7 +99,7 @@ export class PusherService implements OnDestroy {
         },
       });
 
-    this.bindUserDirectMessageChannel();
+    this.bindUserChannels();
   }
 
   initialisePusher() {
@@ -125,33 +127,60 @@ export class PusherService implements OnDestroy {
         key: ConstantPusherConfig.key,
         client: this.pusher,
       });
-    this.bindUserDirectMessageChannel();
+    this.bindUserChannels();
   }
 
-  bindUserDirectMessageChannel() {
+  bindUserChannels() {
     if (this.echo) {
       // this.logger.debug(`${this.constructor.name}: private-user.${this.userUuid}`);
-      this.echo.connect();
-      const channel = this.echo
+      this.userChannel = this.echo
         .private('user.' + this.userUuid);
-      channel
-        .listen('UserNotifyEvent', (alert: InterfaceAlert) => {
-          this.alertService.addAlert(alert.message, alert.alertType);
-        });
-    } else {
-      // this.logger.debug(`Invalid broadcaster`);
-    }
 
+      this.bindUserAlertMessageChannel();
+      this.bindUserActionChannel();
+    }
+  }
+
+  bindUserAlertMessageChannel() {
+    // Binds to only displaying alerts
+    this.userChannel
+      .listen('UserAlertEvent', (alert: InterfaceAlert) => {
+        this.store.dispatch(
+          AlertAdd({
+            payload: {
+              alertType: alert.alertType,
+              message: alert.message,
+            },
+          }),
+        );
+      });
+  }
+
+  bindUserActionChannel() {
+    // Allows accepting any action from websocket
+    this.userChannel
+      .listen('UserSendActionEvent', (actionData: any) => {
+        const action: any = {
+          type: actionData.actionType,
+        };
+
+        if (actionData.actionPayload !== null) {
+          action.payload = actionData.actionPayload;
+        }
+        this.store
+          .dispatch(action);
+      });
   }
 
   ngOnDestroy(): void {
     if (this.pusher && this.pusher.disconnect) {
       if (this.pusher) {
         this.pusher.disconnect();
+        this.logger.debug(`Disconnect Pusher`);
       }
       if (this.echo) {
-        console.log('disconet');
         this.echo.disconnect();
+        this.logger.debug(`Disconnect Echo`);
       }
     }
     this.stop$.next(true);

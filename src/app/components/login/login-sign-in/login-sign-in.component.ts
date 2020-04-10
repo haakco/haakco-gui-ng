@@ -35,7 +35,7 @@ export class LoginSignInComponent implements OnInit {
   onSubmit() {
     this.store.dispatch(
       AuthLogin({
-        userDetails: this.form,
+        payload: this.form,
       }),
     );
   }

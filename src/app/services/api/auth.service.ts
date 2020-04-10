@@ -80,7 +80,7 @@ export class AuthService {
     this.token = token;
     this.loggedIn = true;
     this.store.dispatch(AuthLoginSetToken({
-                                            token,
+                                            payload: token,
                                           }));
   }
 

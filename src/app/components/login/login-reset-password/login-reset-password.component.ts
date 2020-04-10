@@ -35,7 +35,7 @@ export class LoginResetPasswordComponent implements OnInit {
   onSubmit() {
     this.store.dispatch(
       AuthPasswordResetToken({
-        userDetails: {
+        payload: {
           email: this.form.email,
           password: this.form.password,
           password_confirmation: this.form.password,

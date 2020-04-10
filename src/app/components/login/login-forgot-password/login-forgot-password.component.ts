@@ -24,7 +24,7 @@ export class LoginForgotPasswordComponent implements OnInit {
   onSubmit() {
     this.store.dispatch(
       AuthPasswordReset({
-                          userDetails: this.form,
+                          payload: this.form,
                         }),
     );
   }

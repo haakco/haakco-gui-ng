@@ -30,7 +30,7 @@ export class LoginSignUpComponent implements OnInit {
     this.form.password_confirmation = this.form.password;
     this.store.dispatch(
       AuthSignUp({
-        userDetails: {
+        payload: {
           name: this.form.name,
           email: this.form.email,
           password: this.form.password,

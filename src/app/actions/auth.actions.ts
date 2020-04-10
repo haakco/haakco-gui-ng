@@ -6,7 +6,7 @@ import {InterfaceUser} from '../interfaces/InterfaceUser';
 
 export const AuthLogin = createAction(
   '[Auth] Login',
-  props<{ userDetails: InterfaceAuthDetails }>(),
+  props<{ payload: InterfaceAuthDetails }>(),
 );
 
 export const AuthLoginSubmit = createAction(
@@ -20,12 +20,12 @@ export const AuthLogout = createAction(
 
 export const AuthLoginSetToken = createAction(
   '[Auth] Login Set Token',
-  props<{ token: InterfaceToken }>(),
+  props<{ payload: InterfaceToken }>(),
 );
 
 export const AuthLoginSetUrlAfterLogin = createAction(
   '[Auth] Login Set Url After Login',
-  props<{ urlAfterLogin: InterfaceRoute}>(),
+  props<{ payload: InterfaceRoute}>(),
 );
 
 export const AuthLoginGetUrlAfterLogin = createAction(
@@ -48,15 +48,15 @@ export const AuthLoginRedirect = createAction(
 
 export const AuthSignUp = createAction(
   '[Auth] Sign Up',
-  props<{ userDetails: InterfaceAuthDetails }>(),
+  props<{ payload: InterfaceAuthDetails }>(),
 );
 
 export const AuthPasswordReset = createAction(
   '[Auth] Password Reset',
-  props<{ userDetails: InterfaceAuthDetails }>(),
+  props<{ payload: InterfaceAuthDetails }>(),
 );
 
 export const AuthPasswordResetToken = createAction(
   '[Auth] Password Reset Token',
-  props<{ userDetails: InterfaceAuthDetails }>(),
+  props<{ payload: InterfaceAuthDetails }>(),
 );

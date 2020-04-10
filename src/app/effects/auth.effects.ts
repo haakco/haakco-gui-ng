@@ -30,7 +30,7 @@ export class AuthEffects {
             AuthLogin,
           ),
           tap(action => {
-            this.authService.login(action.userDetails);
+            this.authService.login(action.payload);
           }),
         ),
     {dispatch: false},
@@ -105,7 +105,7 @@ export class AuthEffects {
 
             if (currentPath[0] !== 'login') {
               this.store.dispatch(AuthLoginSetUrlAfterLogin({
-                                                              urlAfterLogin: {
+                                                              payload: {
                                                                 path: currentPath,
                                                                 queryParams,
                                                               },
@@ -124,7 +124,7 @@ export class AuthEffects {
             AuthSignUp,
           ),
           tap(action => {
-            this.authService.sigUp(action.userDetails);
+            this.authService.sigUp(action.payload);
           }),
         ),
     {dispatch: false},
@@ -138,7 +138,7 @@ export class AuthEffects {
             AuthPasswordReset,
           ),
           tap(action => {
-            this.authService.sendPasswordResetEmail(action.userDetails);
+            this.authService.sendPasswordResetEmail(action.payload);
           }),
         ),
     {dispatch: false},
@@ -152,7 +152,7 @@ export class AuthEffects {
             AuthPasswordResetToken,
           ),
           tap(action => {
-            this.authService.sendPasswordResetToken(action.userDetails);
+            this.authService.sendPasswordResetToken(action.payload);
           }),
         ),
     {dispatch: false},

@@ -37,11 +37,11 @@ export const initialState: InterfaceStateAuth = {
 const authReducer = createReducer(
   initialState,
   on(AuthLoginSubmit, (state, {payload}) => ({...state, loginSubmit: payload})),
-  on(AuthLoginSetToken, (state, {token}) => (
+  on(AuthLoginSetToken, (state, {payload}) => (
     {
       ...state,
-      token,
-      access_token: token.access_token,
+      token: payload,
+      access_token: payload.access_token,
     }
   )),
   on(AuthLoginSuccessSetUser, (state, {payload}) => ({
@@ -50,7 +50,7 @@ const authReducer = createReducer(
     user: payload,
     loggedIn: true,
   })),
-  on(AuthLoginSetUrlAfterLogin, (state, {urlAfterLogin}) => ({...state, urlAfterLogin})),
+  on(AuthLoginSetUrlAfterLogin, (state, {payload}) => ({...state, payload: payload})),
   on(AuthLogout, (state) => ({...initialState, urlAfterLogin: state.urlAfterLogin})),
 );
 
