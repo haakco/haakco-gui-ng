@@ -37,6 +37,30 @@
           class="full-width-field"
           appearance="standard"
         >
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="username"
+            type="text"
+            name="form.username"
+            autocomplete="username"
+            [(ngModel)]="form.username"
+            required
+            pattern="^[a-zA-Z0-9_]{6,}$"
+            (ngModelChange)="form.username = $event.toLowerCase()"
+          >
+          <fa-icon
+            icon="signature"
+            matSuffix
+          ></fa-icon>
+          <mat-hint align="end">
+            {{ ConstantValidation.usernameRequiredSting }}
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field
+          class="full-width-field"
+          appearance="standard"
+        >
           <mat-label>Email</mat-label>
           <input
             matInput
@@ -46,7 +70,7 @@
             autocomplete="email"
             [(ngModel)]="form.email"
             required
-            pattern="[^ @]*@[^ @]*"
+            pattern="^[^ @]*@[^ @]*$"
           >
           <fa-icon
             icon="envelope"
@@ -77,18 +101,18 @@
             {{ ConstantValidation.passwordRequirementString }}
           </mat-hint>
         </mat-form-field>
-        <p>
-          <a
-            [routerLink]="['/forgot-password']"
-          >
-            I forgot my password
-          </a>
-        </p>
+<!--        <p>-->
+<!--          <a-->
+<!--            [routerLink]="['/forgot-password']"-->
+<!--          >-->
+<!--            I forgot my password-->
+<!--          </a>-->
+<!--        </p>-->
         <p>
           <a
             [routerLink]="['/login']"
             class="text-center"
-          >I already have a membership</a>
+          >Back to Login</a>
         </p>
       </mat-card-content>
       <mat-card-actions>

@@ -7,6 +7,7 @@ import {LoginResetPasswordComponent} from '../components/login/login-reset-passw
 import {LoginSignInComponent} from '../components/login/login-sign-in/login-sign-in.component';
 import {LoginSignUpComponent} from '../components/login/login-sign-up/login-sign-up.component';
 import {UserMeWrapperComponent} from '../components/user/user-me-wrapper/user-me-wrapper.component';
+import {ConstantAppConfig} from '../constants/ConstantAppConfig';
 import {AuthGuard} from '../guards/auth.guard';
 import {AdminRoutingModule} from './admin-routing.module';
 
@@ -22,11 +23,6 @@ const routes: Routes = [
     component: BaseBlankComponent,
     data: {title: 'Home'},
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'sign-up',
-    component: LoginSignUpComponent,
-    data: {title: 'Sign Up'},
   },
   {
     path: 'forgot-password',
@@ -49,8 +45,18 @@ const routes: Routes = [
     data: {title: 'Account'},
     canActivate: [AuthGuard],
   },
-  {path: '**', redirectTo: 'home'},
 ];
+
+if(ConstantAppConfig.enableRegistration) {
+  routes.push({
+    path: 'sign-up',
+    component: LoginSignUpComponent,
+    data: {title: 'Sign Up'},
+  });
+}
+
+// Wild card needs to be last as they are applied in order
+routes.push({path: '**', redirectTo: 'home'});
 
 @NgModule({
   imports: [

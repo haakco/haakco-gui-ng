@@ -64,16 +64,19 @@ export class AuthEffects {
           tap(([action, authState]) => {
             this.authService.loadInitialAuthenticatedData();
             if (
-              authState.urlAfterLogin && authState.urlAfterLogin.path && authState.urlAfterLogin.path.length > 0 &&
+              !!authState.urlAfterLogin &&
+              !!authState.urlAfterLogin.path &&
+              authState.urlAfterLogin.path.length > 0 &&
               authState.urlAfterLogin.path[0] !== 'login'
-            ) {
+            )
+            {
               this.store.dispatch(AuthLoginSetUrlAfterLogin(null));
               this.store.dispatch(RouterGo(authState.urlAfterLogin));
             } else if (this.router.url.includes('/login')) {
               this.store.dispatch(
                 RouterGo({
-                           path: ['/home'],
-                         }),
+                  path: ['/home'],
+                }),
               );
             }
           }),
@@ -105,11 +108,11 @@ export class AuthEffects {
 
             if (currentPath[0] !== 'login') {
               this.store.dispatch(AuthLoginSetUrlAfterLogin({
-                                                              payload: {
-                                                                path: currentPath,
-                                                                queryParams,
-                                                              },
-                                                            }));
+                payload: {
+                  path: currentPath,
+                  queryParams,
+                },
+              }));
             }
           }),
         ),
@@ -163,6 +166,7 @@ export class AuthEffects {
     private store: Store<InterfaceStateApp>,
     private authService: AuthService,
     private router: Router,
-  ) {
+  )
+  {
   }
 }

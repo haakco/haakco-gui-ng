@@ -1,12 +1,12 @@
 {
   "/api/v1": {
-    "target": "http://api.dev.haak.co",
+    "target": "http://laravel.server",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
     "headers": {
       "Connection": "keep-alive"
     },
-    "pathRewrite": {"^/api/v1" : "http://api.dev.haak.co/api/v1"}
+    "pathRewrite": {"^/api/v1" : "http://laravel.server/api/v1"}
   }
 }

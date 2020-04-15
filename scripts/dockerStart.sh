@@ -2,4 +2,4 @@
 PATH=./node_modules/.bin/:$PATH
 cd /home/node/src || exit
 npm install
-npm run start
+npm run start-docker-proxy

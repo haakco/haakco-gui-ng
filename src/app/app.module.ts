@@ -18,6 +18,7 @@ import {faGripVertical} from '@fortawesome/free-solid-svg-icons/faGripVertical';
 import {faHome} from '@fortawesome/free-solid-svg-icons/faHome';
 import {faKey} from '@fortawesome/free-solid-svg-icons/faKey';
 import {faSave} from '@fortawesome/free-solid-svg-icons/faSave';
+import {faSignature} from '@fortawesome/free-solid-svg-icons/faSignature';
 import {faSignInAlt} from '@fortawesome/free-solid-svg-icons/faSignInAlt';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
 import {faTachometerAlt} from '@fortawesome/free-solid-svg-icons/faTachometerAlt';
@@ -176,6 +177,7 @@ export class AppModule {
       faKey,
       faLock,
       faSave,
+      faSignature,
       faSignInAlt,
       faSignOutAlt,
       faTachometerAlt,

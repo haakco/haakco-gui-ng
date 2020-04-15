@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {AuthLogin} from '../../../actions/auth.actions';
+import {ConstantAppConfig} from '../../../constants/ConstantAppConfig';
 import {ConstantValidation} from '../../../constants/ConstantValidation';
 import {InterfaceAuthDetails} from '../../../interfaces/InterfaceAuthDetails';
 import {InterfaceStateApp} from '../../../reducers';
@@ -16,6 +17,7 @@ import {selectAuthState} from '../../../selectors/auth.selectors';
 export class LoginSignInComponent implements OnInit {
 
   ConstantValidation = ConstantValidation;
+  ConstantAppConfig = ConstantAppConfig;
 
   form: InterfaceAuthDetails = {
     email: '',

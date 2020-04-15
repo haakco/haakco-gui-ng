@@ -15,6 +15,7 @@ export class LoginSignUpComponent implements OnInit {
 
   form: InterfaceAuthDetails = {
     name: '',
+    username: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -33,6 +34,7 @@ export class LoginSignUpComponent implements OnInit {
         payload: {
           name: this.form.name,
           email: this.form.email,
+          username: this.form.username,
           password: this.form.password,
           password_confirmation: this.form.password,
         },

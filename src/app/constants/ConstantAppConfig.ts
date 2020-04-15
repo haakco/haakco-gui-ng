@@ -2,6 +2,7 @@ export const ConstantAppConfig = {
   appName: 'HaakCo',
   appSite: 'HaakCo',
   siteUrl: 'https://haak.co',
+  enableRegistration: true,
   navBarLogoImgUrl: '/assets/images/logo.png',
   navBarLogoChar: null,
   navBarLogoTxt: 'HaakCo',

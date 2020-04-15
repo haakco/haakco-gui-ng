@@ -61,7 +61,9 @@
             I forgot my password
           </a>
         </p>
-        <p>
+        <p
+          *ngIf="ConstantAppConfig.enableRegistration"
+        >
           <a
             [routerLink]="['/sign-up']"
             class="text-center"

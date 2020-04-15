@@ -1,3 +1,4 @@
+import {HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as moment from 'moment';
@@ -20,8 +21,8 @@ import {HttpService} from '../helper/http.service';
 import {WindowRef} from '../helper/window-ref.service';
 
 @Injectable({
-              providedIn: 'root',
-            })
+  providedIn: 'root',
+})
 export class AuthService {
 
   user: InterfaceUser;
@@ -38,7 +39,8 @@ export class AuthService {
     private permissionsService: NgxPermissionsService,
     private winRef: WindowRef,
     private alertService: AlertService,
-  ) {
+  )
+  {
     this.store
       .select(selectAuthLoggedIn)
       .subscribe((loggedIn) => {
@@ -62,7 +64,16 @@ export class AuthService {
 
     this.store.dispatch(AuthLoginSubmit({payload: true}));
 
-    return this.httpService.postRequest('/oauth/token', loginData)
+    // Custom error to hand strang auth failure message
+    const customErrorFunction: (err: HttpErrorResponse) => boolean = (err: HttpErrorResponse) => {
+      if (err.status === 400 &&
+        err.error.error === 'invalid_grant') {
+        this.alertService.addAlert('Login failed', EnumAlertTypes.ALERT_TYPE_DANGER, 'Error:');
+        return true;
+      }
+      return false;
+    };
+    return this.httpService.postRequest('/oauth/token', loginData, 0, customErrorFunction)
       .pipe(finalize(() => {
         this.store.dispatch(AuthLoginSubmit({payload: false}));
       }))
@@ -79,9 +90,10 @@ export class AuthService {
   logIn(token: InterfaceToken) {
     this.token = token;
     this.loggedIn = true;
-    this.store.dispatch(AuthLoginSetToken({
-                                            payload: token,
-                                          }));
+    this.store.dispatch(
+      AuthLoginSetToken({
+        payload: token,
+      }));
   }
 
   logOut() {
@@ -91,8 +103,8 @@ export class AuthService {
       });
     this.store.dispatch(
       RouterGo({
-                 path: ['/login'],
-               }),
+        path: ['/login'],
+      }),
     );
     this.permissionsService.flushPermissions();
     this.dataCachingService.clear();
@@ -115,15 +127,20 @@ export class AuthService {
           uuid: string,
         }
       }) => {
-        this.alertService.addAlert('You are now registered', EnumAlertTypes.ALERT_TYPE_SUCCESS);
+        this.alertService.addAlert('You are now registered.<br> Please login.', EnumAlertTypes.ALERT_TYPE_SUCCESS);
         const token = {
           recieved_at: moment().unix(),
           access_token: result.success.access_token,
         };
 
-        this.dataCachingService.save(this.TOKEN_CACHE_KEY, token, -1);
-
-        this.logIn(token);
+        // this.dataCachingService.save(this.TOKEN_CACHE_KEY, token, -1);
+        //
+        // this.logIn(token);
+        this.store.dispatch(
+          RouterGo({
+            path: ['/login'],
+          }),
+        );
       });
   }
 
@@ -132,8 +149,8 @@ export class AuthService {
       .subscribe((result: any) => {
         this.store.dispatch(
           RouterGo({
-                     path: ['/login'],
-                   }),
+            path: ['/login'],
+          }),
         );
         this.alertService.addAlert('Password Reset Email Sent', EnumAlertTypes.ALERT_TYPE_SUCCESS);
       });
@@ -144,8 +161,8 @@ export class AuthService {
       .subscribe((result: any) => {
         this.store.dispatch(
           RouterGo({
-                     path: ['/login'],
-                   }),
+            path: ['/login'],
+          }),
         );
         this.alertService.addAlert('Password Reset', EnumAlertTypes.ALERT_TYPE_SUCCESS);
       });

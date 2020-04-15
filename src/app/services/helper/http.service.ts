@@ -33,7 +33,8 @@ export class HttpService implements OnDestroy {
     private store: Store<InterfaceStateApp>,
     private winRef: WindowRef,
     private alertService: AlertService,
-  ) {
+  )
+  {
     if (ConstantAppConfig.apiBaseUrl[this.winRef.nativeWindow.location.hostname]) {
       this.baseUrl = ConstantAppConfig.apiBaseUrl[this.winRef.nativeWindow.location.hostname];
     } else {
@@ -65,7 +66,8 @@ export class HttpService implements OnDestroy {
       this.token !== null &&
       !isEmpty(this.token.access_token) &&
       this.token.access_token !== ''
-    ) {
+    )
+    {
       headers.Authorization = `Bearer ${this.token.access_token}`;
     }
 
@@ -139,7 +141,7 @@ export class HttpService implements OnDestroy {
     });
   }
 
-  postRequest(url: string, body: any, cacheTimeSeconds = 0) {
+  postRequest(url: string, body: any, cacheTimeSeconds = 0, customErrorFunction: (err: HttpErrorResponse) => boolean = null) {
 
     return new Observable(observer => {
 
@@ -166,7 +168,7 @@ export class HttpService implements OnDestroy {
             return this.http
               .post(this.baseUrl + url, body, requestOptions)
               .pipe(
-                catchError(this.handleError.bind(this)),
+                catchError(err => this.handleError.bind(this)(err, customErrorFunction)),
                 takeUntil(this.stop$),
               )
               .subscribe((httpResult) => {
@@ -252,7 +254,8 @@ export class HttpService implements OnDestroy {
           headers: this.getHTTPHeaders(acceptMimeType, ''),
           params: new HttpParams(),
           reportProgress: true,
-        });
+        },
+      );
 
       // create a new progress-subject for every file
       const progress = new Subject<number>();
@@ -360,41 +363,48 @@ export class HttpService implements OnDestroy {
     saveAs(blob, downloadFileName);
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse, customErrorFunction: (err: HttpErrorResponse) => boolean = null) {
     let message = 'Something went wrong';
-    if (error &&
-      error.status &&
-      (
-        error.status === 401
+    let useCustom = false;
+    if (customErrorFunction !== null) {
+      useCustom = customErrorFunction(error);
+    }
+    if (!useCustom) {
+      if (error &&
+        error.status &&
+        (
+          error.status === 401
+        )
       )
-    ) {
-      if (error.error && error.error.message) {
-        message = error.error.message;
-      } else {
-        message = 'Not authorised';
-      }
-      this.store.dispatch(
-        AuthLogout(),
-      );
-    } else {
-      if (error.error && error.error.message) {
-        if (error.error.errors && error.error.errors.description) {
-          message = error.error.errors.description;
-        } else if (error.error.errors) {
-          message = '';
-          Object.keys(error.error.errors)
-            .map((errorKey) => {
-              error.error.errors[errorKey]
-                .map((errorString) => {
-                  message += errorString;
-                });
-            });
-        } else {
+      {
+        if (error.error && error.error.message) {
           message = error.error.message;
+        } else {
+          message = 'Not authorised';
+        }
+        this.store.dispatch(
+          AuthLogout(),
+        );
+      } else {
+        if (error.error && error.error.message) {
+          if (error.error.errors && error.error.errors.description) {
+            message = error.error.errors.description;
+          } else if (error.error.errors) {
+            message = '';
+            Object.keys(error.error.errors)
+              .map((errorKey) => {
+                error.error.errors[errorKey]
+                  .map((errorString) => {
+                    message += errorString;
+                  });
+              });
+          } else {
+            message = error.error.message;
+          }
         }
       }
+      this.alertService.addAlert(message, EnumAlertTypes.ALERT_TYPE_DANGER, 'Error:');
     }
-    this.alertService.addAlert(message, EnumAlertTypes.ALERT_TYPE_DANGER, 'Error:');
     return observableThrowError(error);
   }
 
