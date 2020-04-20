@@ -19,7 +19,8 @@
     "sort-packages": "npx sort-package-json",
     "start": "node ./node_modules/.bin/ng serve --configuration hmr --publicHost=http://dev.haak.co:4200 --aot=true --host 0.0.0.0 --disableHostCheck=true",
     "start-docker-proxy": "node ./node_modules/.bin/ng serve --publicHost=http://dev.haak.co:4200 --proxy-config proxy.docker.conf.json --configuration hmr --aot=true --host 0.0.0.0 --disableHostCheck=true",
-    "start-docker": "docker run -it --name haakco-gui-ng-dev -p 4200:4200 --network haakco-net --rm -v \"$(pwd):/home/node/src:delegated\" haakco/haakco-gui-ng-dev /home/node/src/scripts/dockerStart.sh",
+    "start-docker": "docker rm -f haakco-gui-ng-dev;docker run -it --name haakco-gui-ng-dev -p 4200:4200 --network haakco-net --rm -v \"$(pwd):/home/node/src:delegated\" haakco/haakco-gui-ng-dev /home/node/src/scripts/dockerStart.sh",
+    "stop-docker": "docker rm -f haakco-gui-ng-dev",
     "test": "ng test",
     "favicons": "npx favicons"
   },
@@ -105,7 +106,7 @@
     "@types/jasminewd2": "~2.0.8",
     "@types/lodash-es": "^4.17.3",
     "@types/mime-types": "^2.1.0",
-    "@types/node": "^13.11.1",
+    "@types/node": "^13.13.0",
     "@types/pusher-js": "^4.2.2",
     "codelyzer": "^5.2.2",
     "eslint": "^6.8.0",
