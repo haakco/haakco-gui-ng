@@ -18,6 +18,7 @@ export class UserRolesComponent implements OnInit {
 
   @Input() set user(user: InterfaceUser) {
     if (user && user.roles) {
+      console.log(user);
       this.userRoles = Object.values(user.roles);
     }
   };
@@ -33,14 +34,6 @@ export class UserRolesComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log([
-                    event.previousContainer.data,
-                    event.container.data,
-                    event.previousIndex,
-                    event.currentIndex,
-                    this.availableRoles,
-                    this.userRoles,
-                  ]);
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -48,6 +41,15 @@ export class UserRolesComponent implements OnInit {
         event.currentIndex,
       );
     }
+
+    console.log([
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+      this.availableRoles,
+      this.userRoles,
+    ]);
   }
 
 }
