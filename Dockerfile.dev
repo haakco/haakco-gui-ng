@@ -12,6 +12,9 @@ RUN mkdir -p /home/node/.npm-global && \
 ENV PATH=/home/node/.npm-global/bin:$PATH
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 
+## Cleanout previous dev just in case
+RUN rm -rf /home/node/src/*
+
 ADD . /home/node/src
 
 WORKDIR /home/node/src
@@ -25,7 +28,7 @@ RUN npm install -g \
 
 RUN cd /home/node/src && \
     PATH=./node_modules/.bin/:$PATH && \
-    npm install
+    npm --unsafe-perm ci --prefer-offline
 
 RUN npm run build
 
