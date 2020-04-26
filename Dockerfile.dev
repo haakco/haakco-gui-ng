@@ -27,8 +27,9 @@ RUN npm install -g \
       typescript@latest
 
 RUN cd /home/node/src && \
-    PATH=./node_modules/.bin/:$PATH && \
-    npm --unsafe-perm ci --prefer-offline
+    export PATH=./node_modules/.bin/:$PATH && \
+    export  && \
+    npm --unsafe-perm install --prefer-offline
 
 RUN npm run build
 
