@@ -67,7 +67,7 @@
     "lodash-es": "^4.17.15",
     "material-icons": "^0.3.1",
     "mime-types": "^2.1.27",
-    "moment": "^2.25.0",
+    "moment": "2.24.0",
     "ng2-charts": "^2.3.0",
     "ng2-smart-table": "^1.6.0",
     "ngrx-store-freeze": "^0.2.4",
