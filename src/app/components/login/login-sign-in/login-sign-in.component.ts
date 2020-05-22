@@ -19,7 +19,7 @@ export class LoginSignInComponent implements OnInit {
   ConstantValidation = ConstantValidation;
   ConstantAppConfig = ConstantAppConfig;
 
-  form: InterfaceAuthDetails = {
+  public form: InterfaceAuthDetails = {
     email: '',
     password: '',
     rememberMe: false,
@@ -37,7 +37,7 @@ export class LoginSignInComponent implements OnInit {
   onSubmit() {
     this.store.dispatch(
       AuthLogin({
-        payload: this.form,
+        payload: {...this.form},
       }),
     );
   }
