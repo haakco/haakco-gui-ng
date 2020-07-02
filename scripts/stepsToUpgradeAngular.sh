@@ -2,8 +2,8 @@
 # Do not do this in master only in your own branch
 # check what needs to be updated
 #npm install -g @angular/cli@latest
-npm install -g @angular/cli
-npm install @angular/cli --save
+npm install -g @angular/cli@latest
+npm install @angular/cli@latest --save
 #npm install @angular/cli@latest --save
 git commit -a -m 'Update'
 ng update @angular/cli
