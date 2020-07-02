@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "ngcc",
     "build": "node ./node_modules/.bin/ng build --configuration hmr --aot=true",
-    "bundle-report": "ng build --stats-json; webpack-bundle-analyzer dist/haakco-gui-ng/stats-es2015.json",
+    "bundle-report": "ng build --stats-json; webpack-bundle-analyzer dist/haakco-gui-ng/stats-es2018.json",
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
