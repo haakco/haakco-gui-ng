@@ -111,7 +111,7 @@ export class PusherService implements OnDestroy {
 
     this.pusher = new Pusher.default(ConstantPusherConfig.key, {
       cluster: ConstantPusherConfig.cluster,
-      encrypted: true,
+      forceTLS: true,
       authEndpoint: this.authEndPoint,
       auth: {
         headers: {

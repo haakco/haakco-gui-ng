@@ -17,6 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@angularclass/hmr",
+              "ngrx-store-localstorage",
+              "file-saver",
+              "mime-types",
+              "path",
+              "mime-db"
+            ],
             "outputPath": "dist/haakco-gui-ng",
             "index": "src/index.html",
             "main": "src/main.ts",

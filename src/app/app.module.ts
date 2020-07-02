@@ -3,7 +3,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HammerModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import {ServiceWorkerModule} from '@angular/service-worker';
@@ -119,6 +119,7 @@ import {LogUpdateService} from './services/ServiceWorkerServices/log-update.serv
               FormsModule,
               FlexLayoutModule,
               HttpClientModule,
+              HammerModule,
               LoggerModule.forRoot({
                                      level: (environment.production ? NgxLoggerLevel.ERROR : NgxLoggerLevel.DEBUG),
                                      // serverLoggingUrl: '/api/logs',
