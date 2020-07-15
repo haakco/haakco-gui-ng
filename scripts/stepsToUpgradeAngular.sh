@@ -6,12 +6,12 @@ npm install -g @angular/cli@latest
 npm install @angular/cli@latest --save
 #npm install @angular/cli@latest --save
 git commit -a -m 'Update'
-ng update @angular/cli
+ng update @angular/cli @angular/core --createCommits=true
 git commit -a -m 'Update @angular/cli'
-ng update @angular/core
-git commit -a -m 'Update @angular/core'
-ng update @angular/material
+ng update @angular/material --createCommits=true
 git commit -a -m 'Update @angular/material'
+ng update --all
+git commit -a -m 'ng update --all'
 ncu
 
 # Update what you think should be updated
