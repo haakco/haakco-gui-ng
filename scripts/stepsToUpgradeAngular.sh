@@ -15,7 +15,7 @@ git commit -a -m 'ng update --all'
 ncu
 
 # Update what you think should be updated
-# do not upgrade zone.js and typescript they are udpated by ng update @angular/cli
+# do not upgrade zone.js and typescript they are updated by ng update @angular/cli
 
 rm -rf node_modules package-lock.json
 npm install
