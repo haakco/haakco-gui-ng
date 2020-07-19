@@ -11,27 +11,9 @@
 
       <mat-chip-list>
         <mat-chip
-          *ngFor="let role of user.roles | orderBy"
+          *ngFor="let role of user.roles| values | orderBy"
         >
           {{role}}
-        </mat-chip>&nbsp;
-      </mat-chip-list>
-    </p>
-    <hr>
-
-    <strong>
-      <fa-icon
-        icon="user-tag"
-      ></fa-icon>
-      Permissions
-    </strong>
-
-    <p class="text-muted">
-      <mat-chip-list>
-        <mat-chip
-          *ngFor="let permission of user.permissions | orderBy"
-        >
-          {{permission}}
         </mat-chip>&nbsp;
       </mat-chip-list>
     </p>

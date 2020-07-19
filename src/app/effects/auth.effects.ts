@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {select, Store} from '@ngrx/store';
+import {NgxPermissionsService} from 'ngx-permissions';
 import {of} from 'rxjs';
 import {concatMap, tap, withLatestFrom} from 'rxjs/operators';
 import {
@@ -12,6 +13,7 @@ import {
   AuthLogout,
   AuthPasswordReset,
   AuthPasswordResetToken,
+  AuthSetPermissions,
   AuthSignUp,
 } from '../actions/auth.actions';
 import {RouterGo} from '../actions/router.actions';
@@ -161,11 +163,27 @@ export class AuthEffects {
     {dispatch: false},
   );
 
+  authSetPermissions$ = createEffect(
+    () =>
+      this.actions$
+        .pipe(
+          ofType(
+            AuthSetPermissions,
+          ),
+          tap(action => {
+            this.permissionsService.flushPermissions();
+            this.permissionsService.addPermission(Object.values(action.payload));
+          }),
+        ),
+    {dispatch: false},
+  );
+
   constructor(
     private actions$: Actions,
     private store: Store<InterfaceStateApp>,
     private authService: AuthService,
     private router: Router,
+    private permissionsService: NgxPermissionsService,
   )
   {
   }

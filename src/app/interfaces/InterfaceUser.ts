@@ -5,7 +5,8 @@ export interface InterfaceUser {
   email_verified_at?: string;
   name: string;
   email: string;
-  permissions?: string[];
-  roles?: string[];
+  emails: {[uuid: string]: string};
+  permissions?: { [uuid: string]: string };
+  roles?: { [uuid: string]: string };
   imgUrl?: string;
 }

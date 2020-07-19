@@ -60,3 +60,13 @@ export const AuthPasswordResetToken = createAction(
   '[Auth] Password Reset Token',
   props<{ payload: InterfaceAuthDetails }>(),
 );
+
+export const AuthSetPermissions = createAction(
+  '[Auth] Password Set Permissions',
+  props<{ payload: { [uuid: string]: string } }>(),
+);
+
+export const AuthSetRoles = createAction(
+  '[Auth] Password Set Roles',
+  props<{ payload: { [uuid: string]: string } }>(),
+);

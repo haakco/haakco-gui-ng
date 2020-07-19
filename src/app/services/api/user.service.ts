@@ -4,7 +4,7 @@ import {NGXLogger} from 'ngx-logger';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {first} from 'rxjs/operators';
 import {AlertAdd} from '../../actions/alert.actions';
-import {AuthLoginSuccessSetUser} from '../../actions/auth.actions';
+import {AuthLoginSuccessSetUser, AuthSetPermissions, AuthSetRoles} from '../../actions/auth.actions';
 import {UserSetAllUsersDetails, UserSetSingleUsersDetails} from '../../actions/user.actions';
 import {EnumAlertTypes} from '../../enums/EnumAlertTypes';
 import {InterfaceUser} from '../../interfaces/InterfaceUser';
@@ -13,8 +13,8 @@ import {selectAuthUser} from '../../selectors/auth.selectors';
 import {HttpService} from '../helper/http.service';
 
 @Injectable({
-              providedIn: 'root',
-            })
+  providedIn: 'root',
+})
 export class UserService {
 
   user: InterfaceUser;
@@ -31,8 +31,16 @@ export class UserService {
           {
             payload: this.user,
           }));
-        this.permissionsService.flushPermissions();
-        this.permissionsService.addPermission(user.permissions);
+        this.store.dispatch(
+          AuthSetPermissions({
+            payload: user.permissions,
+          }),
+        );
+        this.store.dispatch(
+          AuthSetRoles({
+            payload: user.roles,
+          }),
+        );
       });
   }
 
@@ -118,7 +126,7 @@ export class UserService {
     private logger: NGXLogger,
     private httpService: HttpService,
     private store: Store<InterfaceStateApp>,
-    private permissionsService: NgxPermissionsService,
-  ) {
+  )
+  {
   }
 }

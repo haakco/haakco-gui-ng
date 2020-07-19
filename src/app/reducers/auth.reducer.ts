@@ -4,7 +4,7 @@ import {
   AuthLoginSetUrlAfterLogin,
   AuthLoginSubmit,
   AuthLoginSuccessSetUser,
-  AuthLogout,
+  AuthLogout, AuthSetPermissions, AuthSetRoles,
 } from '../actions/auth.actions';
 import {InterfaceRoute} from '../interfaces/InterfaceRoute';
 import {InterfaceToken} from '../interfaces/InterfaceToken';
@@ -15,8 +15,8 @@ export interface InterfaceStateAuth {
   loggedIn: boolean;
   userUuid: string;
   user: InterfaceUser;
-  permissions: string[];
-  roles: string[];
+  permissions: { [uuid: string]: string };
+  roles: { [uuid: string]: string };
   access_token: string;
   token: InterfaceToken;
   urlAfterLogin: InterfaceRoute;
@@ -27,8 +27,8 @@ export const initialState: InterfaceStateAuth = {
   loggedIn: false,
   userUuid: null,
   user: null,
-  permissions: [],
-  roles: [],
+  permissions: {},
+  roles: {},
   access_token: null,
   token: null,
   urlAfterLogin: null,
@@ -50,7 +50,9 @@ const authReducer = createReducer(
     user: payload,
     loggedIn: true,
   })),
-  on(AuthLoginSetUrlAfterLogin, (state, {payload}) => ({...state, payload: payload})),
+  on(AuthSetPermissions, (state, {payload}) => ({...state, permissions: payload})),
+  on(AuthSetRoles, (state, {payload}) => ({...state, roles: payload})),
+  on(AuthLoginSetUrlAfterLogin, (state, {payload}) => ({...state, urlAfterLogin: payload})),
   on(AuthLogout, (state) => ({...initialState, urlAfterLogin: state.urlAfterLogin})),
 );
 
