@@ -1,23 +1,21 @@
 FROM node:latest
 
-ENV LANG="en_US.UTF-8" \
-    LC_ALL="C.UTF-8" \
-    LANGUAGE="en_US.UTF-8" \
-    TERM="xterm"
-
-RUN mkdir -p /home/node/.npm-global && \
-    rm -rf /home/node/src/* && \
-    npm set progress=false
-
-ENV PATH=/home/node/.npm-global/bin:$PATH
+ENV LANG="en_US.UTF-8"
+ENV LC_ALL="C.UTF-8"
+ENV LANGUAGE="en_US.UTF-8"
+ENV TERM="xterm"
+ENV PATH="./node_modules/.bin/:/home/node/.npm-global/bin:$PATH"
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 
-## Cleanout previous dev just in case
+RUN mkdir -p /home/node/.npm-global/lib
+RUN mkdir -p  /home/node/src
 RUN rm -rf /home/node/src/*
 
-ADD . /home/node/src
-
 WORKDIR /home/node/src
+
+RUN npm set progress=false
+
+ADD . /home/node/src
 
 RUN npm install -g \
       @angular/cli@latest \
@@ -26,10 +24,7 @@ RUN npm install -g \
       npm-check-updates@latest \
       typescript@latest
 
-RUN cd /home/node/src && \
-    export PATH=./node_modules/.bin/:$PATH && \
-    export  && \
-    npm --unsafe-perm install --prefer-offline
+RUN npm --unsafe-perm install --prefer-offline
 
 RUN npm run build
 
