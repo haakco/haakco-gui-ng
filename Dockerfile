@@ -1,37 +1,16 @@
-FROM haakco/haakco-gui-ng-dev:latest as node_builder
-
-ENV LANG="en_US.UTF-8" \
-    LC_ALL="C.UTF-8" \
-    LANGUAGE="en_US.UTF-8" \
-    TERM="xterm"
-
-RUN mkdir -p /home/node/.npm-global && \
-    rm -rf /home/node/src/* && \
-    npm set progress=false
-
-ENV PATH=/home/node/.npm-global/bin:$PATH
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+FROM registry.haak.co/geek-gui-ng-dev:latest as node_builder
 
 ## Cleanout previous dev just in case
 RUN rm -rf /home/node/src/*
+RUN rm -rf /home/node/.npm-global/lib/*
 
 ADD . /home/node/src
 
 WORKDIR /home/node/src
 
-RUN npm install -g \
-      @angular/cli@latest \
-      flow-bin@latest \
-      node-gyp@latest nodemon@latest\
-      npm-check-updates@latest \
-      typescript@latest
-
-RUN cd /home/node/src && \
-    PATH=./node_modules/.bin/:$PATH && \
-    npm --unsafe-perm ci --prefer-offline
-
+RUN npm --unsafe-perm ci --prefer-offline
 RUN npm run prod
 
 FROM haakco/nginx-alpine
 
-COPY --from=0 /home/node/src/dist/haakco-gui-ng /nginx/nginx_config/site
+COPY --from=0 /home/node/src/dist/geek-gui-ng /nginx/nginx_config/site
