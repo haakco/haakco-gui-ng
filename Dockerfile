@@ -1,4 +1,4 @@
-FROM registry.haak.co/geek-gui-ng-dev:latest as node_builder
+FROM haakco/haakco-gui-ng-dev:latest as node_builder
 
 ## Cleanout previous dev just in case
 RUN rm -rf /home/node/src/*
@@ -13,4 +13,4 @@ RUN npm run prod
 
 FROM haakco/nginx-alpine
 
-COPY --from=0 /home/node/src/dist/geek-gui-ng /nginx/nginx_config/site
+COPY --from=0 /home/node/src/dist/haakco-gui-ng /nginx/nginx_config/site
